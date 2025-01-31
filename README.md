@@ -1,6 +1,6 @@
 # Ruby on Rails Application
 
-This **Ruby on Rails**! application is deployed using Docker containers split across isolated tiers {WEB, APP, DB} - Docker compose manages the deployments, volumes and networks.
+This **Ruby on Rails** application is deployed using Docker containers split across isolated tiers {WEB, APP, DB} - Docker compose manages the deployments, volumes and networks.
 The full Configuration details and deployment instructions are below.
 
 ## Table of Contents
