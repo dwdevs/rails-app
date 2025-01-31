@@ -1,0 +1,15 @@
+# Ignore rails APP dir structure & DB data dir
+/app
+/db
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files.
+/.env*
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
