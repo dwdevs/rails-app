@@ -14,7 +14,7 @@ The full Configuration details and deployment instructions are below.
 
 ## Quick Deploy
 ```bash
-   git clone https://github.com/dwdevs/rails-app.git
+   git clone git@github.com:dwdevs/rails-app.git
    cd rails-app
    cp -av sample.env .env
    make init
