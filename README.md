@@ -24,7 +24,7 @@ The full Configuration details and deployment instructions are below.
 - **Git**: Source code and version control to GitHub
 - **Docker**: Servers running on configured containers
 - **Docker compose**: Managing docker deloyments, network and volumes
-- **PostgreSQL**: Database server linked with Rail application using - database.yml
+- **PostgreSQL**: Database server linked with Rails application using - database.yml
 - **NGINX**: Webs server acting as a reverse proxy, serving requests to backend servers
 - **Ruby**: Application server - Linux container built 
 - **Rails**: web framework package with other supporting gems defined in Gemfile
