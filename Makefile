@@ -1,5 +1,5 @@
 # Define the default service name
-APP_NAME=fundpips
+APP_NAME=
 
 # Default target
 .PHONY: help
@@ -55,6 +55,7 @@ reboot:
 	docker compose down --remove-orphans --rmi local
 	docker compose up -d --force-recreate --build
 
+# This needs to changing to destroy - Remove everything deployed
 .PHONY: shutdown
 shutdown:
 	docker compose down --rmi all --volumes
@@ -64,16 +65,31 @@ shutdown:
 bash:
 	docker compose run --rm -it app bash
 
+# View logs from the web container
+.PHONY: logs-web
+logs-web:
+	docker compose logs -f web
+
 # View logs from the app container
-.PHONY: logs
-logs:
+.PHONY: logs-app
+logs-app:
 	docker compose logs -f app
 
-# Test the DB server directly
-.PHONY: psql
-psql:
-	docker compose exec db psql -U username -d postgres 
+# View logs from the db container
+.PHONY: logs-db
+logs-db:
+	docker compose logs -f db
 
+# Show all databases on PostgreSQL server
+.PHONY: show-db
+show-db:
+	docker compose exec db psql -U username -d postgres -c '\l' 
+
+# Connect to the DB directly
 .PHONY: psql-app
 psql-app:
+	docker compose exec db psql -U username -d postgres 
+
+.PHONY: psql-app-sql
+psql-app-sql:
 	docker compose exec db psql -U username -d ${APP_NAME}-db -c "SELECT schema_name FROM information_schema.schemata;"
