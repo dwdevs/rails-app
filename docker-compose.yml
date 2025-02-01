@@ -12,6 +12,7 @@ services:
 
   app:
     build: .
+    image: ${APP_NAME}:latest
     env_file:
       - .env
     environment:
