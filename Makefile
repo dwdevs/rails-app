@@ -39,7 +39,7 @@ up:
 # Stop the containers
 .PHONY: down
 down:
-	docker compose down --remove-orphans --rmi local
+	docker compose down --remove-orphans
 
 # Restart the app container
 .PHONY: restart
@@ -49,7 +49,6 @@ restart:
 # Reboot - docker-compose down and up
 .PHONY: reboot
 reboot:
-	docker compose down --remove-orphans --rmi local
 	docker compose up -d --force-recreate --build
 
 # This needs to changing to destroy - Remove everything deployed
