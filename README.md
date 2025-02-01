@@ -20,7 +20,6 @@ To successfully run this application, you need to have the following:
 - **Git**: You should have Git installed to clone the repository and code - https://git-scm.com/downloads
 - **Docker**: Docker desktop is available on Mac-os, Windows and Linux - https://docs.docker.com/desktop
 ---
-&nbsp;
 
 ## Tech Stack
 - **Git** - Source code and version control
