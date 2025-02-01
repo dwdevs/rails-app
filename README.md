@@ -111,7 +111,7 @@ Details on how to manually install and deploy this Ruby on Rails Application:
 4. Build and Deploy the containers and applictaion:
    ```bash
    docker compose build --no-cache
-	docker compose up -d --force-recreate
+   docker compose up -d --force-recreate
 
 5. Start detachable bash session on the development APP server: (optional)
    ```bash
