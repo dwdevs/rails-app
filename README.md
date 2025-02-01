@@ -143,9 +143,9 @@ Details on how to manually install and deploy this Ruby on Rails Application:
         - Forwards it to the **Rails APP** container
         - Serves static assets directly if applicable
   3. **Rails** Application:
-    - Processes the request
-    - Interacts with the **PostgreSQL database** to fetch or store data
-    - Returns the response to **Nginx**
+        - Processes the request
+        - Interacts with the **PostgreSQL database** to fetch or store data
+        - Returns the response to **Nginx**
   4. **Nginx**: Sends the response back to the client
 ---
 &nbsp;
