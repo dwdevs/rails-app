@@ -1,5 +1,5 @@
-# Define the default service name
-APP_NAME=demo
+include .env
+export $(shell sed 's/=.*//' .env)
 
 # Default target
 .PHONY: help
@@ -39,7 +39,7 @@ up:
 # Stop the containers
 .PHONY: down
 down:
-	docker compose down --remove-orphans
+	docker compose down
 
 # Restart the app container
 .PHONY: restart
@@ -49,6 +49,7 @@ restart:
 # Reboot - docker-compose down and up
 .PHONY: reboot
 reboot:
+	docker compose down --remove-orphans
 	docker compose up -d --force-recreate --build
 
 # This needs to changing to destroy - Remove everything deployed
@@ -79,14 +80,14 @@ logs-db:
 # Show all databases on PostgreSQL server
 .PHONY: show-db
 show-db:
-	docker compose exec db psql -U username -d postgres -c '\l' 
+	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} -c '\l' 
 
 # Connect to PostgreSQL and connect to the application database
 .PHONY: psql-app
 psql-app:
-	docker compose exec db psql -U username -d postgres 
+	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} 
 
 # SQL directly to db container to show schemas on the applicaion database
 .PHONY: psql-app-sql
 psql-app-sql:
-	docker compose exec db psql -U username -d ${APP_NAME}-db -c "SELECT schema_name FROM information_schema.schemata;"
+	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} -c "SELECT schema_name FROM information_schema.schemata;"
