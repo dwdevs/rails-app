@@ -80,12 +80,10 @@ To successfully run this application, you need to have the following:
 ```bash
    # Show all databases on PostgreSQL server
    make show-db
-```
-```bash
+
    # Connect to PostgreSQL and connect to the application database
    make psql-app
-```
-```bash
+
    # SQL directly to show schemas on the applicaion database
    make psql-app-sql
 ```
