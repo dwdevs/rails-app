@@ -50,7 +50,10 @@ To successfully run this application, you need to have the following:
    # Build image from dockerfile and desploy using docker compose
    make init
 ```
-
+```bash
+   # Build image from dockerfile from scratch no cache
+   make build
+```
 ```bash
    # Deploy the conatiners and start rails app
    make up
