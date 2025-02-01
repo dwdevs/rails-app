@@ -18,7 +18,7 @@ The full Configuration details and deployment instructions are below.
 ## System Requirements
 To successfully run this application, you need to have the following:
 - **Git**: You should have Git installed to clone the repository and code - https://git-scm.com/downloads
-- **Docker**: Windows, Mac-os and Linux Docker desktop is available - https://docs.docker.com/desktop
+- **Docker**: Docker desktop is available on Mac-os, Windows and Linux - https://docs.docker.com/desktop
 ---
 &nbsp;
 
