@@ -53,8 +53,8 @@ reboot:
 	docker compose up -d --force-recreate --build
 
 # This needs to changing to destroy - Remove everything deployed
-.PHONY: shutdown
-shutdown:
+.PHONY: destroy
+destroy:
 	docker compose down --rmi all --volumes
 
 # Open a bash shell in the app container
