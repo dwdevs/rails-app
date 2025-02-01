@@ -123,7 +123,7 @@ Details on how to manually install and deploy this Ruby on Rails Application:
 
 7. View the Rails APP on your browser 
    ```bash
-   open http://localhost:3000
+   open http://localhost:3000 or http://app:3000
 ---
 &nbsp;
 
