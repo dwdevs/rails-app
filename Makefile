@@ -1,28 +1,25 @@
 # Define the default service name
-APP_NAME=
+APP_NAME=demo
 
 # Default target
 .PHONY: help
 help:
 	@echo "Available commands:"
-	@echo "  make init       - The first command to run new directory Build Docker images and deploy"
-	@echo "  make build      - Build the Docker images"
-	@echo "  make up         - Deploy containers without forcing build"
-	@echo "  make down       - Stop, remove containers, orphans and local images built"
-	@echo "  make restart    - Restart WEB, APP, DB - no changes reflected"
-	@echo "  make reboot     - Reboot, down first then up but with build for changes"
-	@echo "  make shutdown   - Shutdown removing all containers, images and volumes"
-	@echo "  make bash       - Open a bash shell in the app container and remove on exit"
-	@echo "  make logs       - View logs from the app container"
-	@echo "  make psql       - Connect to the PostgreSQL and Postgres database"
-	@echo "  make psql-app   - Connect directly to the APP database and list schemas"
-
-.PHONY: nuke
-nuke:
-	docker compose down --remove-orphans --rmi all --volumes
-	docker compose rm -f
-	docker system prune -a -f
-
+	@echo "  make init         -  Build image from dockerfile and desploy using docker compose"
+	@echo "  make build        -  Build image from dockerfile from scratch no cache"
+	@echo "  make up           -  Deploy the conatiners and start rails app"
+	@echo "  make down         -  Stop all the containers and remove"
+	@echo "  make restart      -  Restart all the containers"
+	@echo "  make reboot       -  Remove everything then rebuild and deploy"
+	@echo "  make destroy      -  Destroy everything deployed"
+	@echo "  make bash         -  Open a bash shell in the app container and remove on exit"
+	@echo "  make log-web      -  View logs from the webserver container running NGINX"
+	@echo "  make logs-app     -  View logs from the application container running Ruby on Rails"
+	@echo "  make logs-db      -  View logs from the database container running PostgreSQL"
+	@echo "  make show-db      -  Show all databases on PostgreSQL server"
+	@echo "  make psql-app     -  Connect to PostgreSQL and connect to the application database"
+	@echo "  make psql-app-sql -  SQL directly to show schemas on the applicaion database"
+	
 # Set up a fresh Rails app and then build into the image to deploy from
 .PHONY: init
 init:
@@ -85,11 +82,12 @@ logs-db:
 show-db:
 	docker compose exec db psql -U username -d postgres -c '\l' 
 
-# Connect to the DB directly
+# Connect to PostgreSQL and connect to the application database
 .PHONY: psql-app
 psql-app:
 	docker compose exec db psql -U username -d postgres 
 
+# SQL directly to db container to show schemas on the applicaion database
 .PHONY: psql-app-sql
 psql-app-sql:
 	docker compose exec db psql -U username -d ${APP_NAME}-db -c "SELECT schema_name FROM information_schema.schemata;"

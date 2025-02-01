@@ -91,7 +91,7 @@ To successfully run this application, you need to have the following:
    # Connect to PostgreSQL and connect to the application database
    make psql-app
 
-   # SQL directly to show schemas on the applicaion database
+   # SQL directly to the db container to show schemas on the applicaion database
    make psql-app-sql
 ```
 ---
