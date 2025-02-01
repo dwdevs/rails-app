@@ -15,7 +15,6 @@ The full Configuration details and deployment instructions are below.
 - [Folder Structure](#folder-structure)
 ---
 &nbsp;
-
 ## System Requirements
 To successfully run this application, you need to have the following:
 - Git: You should have Git installed to clone the repository and code - https://git-scm.com/downloads
