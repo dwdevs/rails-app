@@ -137,7 +137,7 @@ Details on how to manually install and deploy this Ruby on Rails Application:
 &nbsp;
 
 ## Typical Solution Workflow
-  1. Client Request: A user sends a request (e.g., visiting a website or calling an API endpoint http://localhost:3000/api-endpoint)
+  1. Client Request: A user sends a request (e.g., visiting a website or calling an API endpoint http://app:3000/api-endpoint)
   2. **Nginx** Reverse Proxy:
         - Receives the request
         - Forwards it to the **Rails APP** container
