@@ -38,7 +38,7 @@ To successfully run this application, you need to have the following:
 ### Deploy:
 ```bash
    git clone git@github.com:dwdevs/ruby-on-rails.git
-   cd rails-app
+   cd ruby-on-rails
    cp -av sample.env .env
    make init
 ```
