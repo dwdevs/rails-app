@@ -1,5 +1,5 @@
 # Ignore rails APP dir structure & DB data dir
-/app
+/rails-app
 /db
 
 # Ignore bundler config

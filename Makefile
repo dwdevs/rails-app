@@ -11,6 +11,7 @@ help:
 	@echo "  make down         -  Stop all the containers and remove"
 	@echo "  make restart      -  Restart all the containers"
 	@echo "  make reboot       -  Remove everything then rebuild and deploy"
+	@echo "  make rebuild      -  Rebuild - docker-compose down, build and up"
 	@echo "  make destroy      -  Destroy everything deployed"
 	@echo "  make bash         -  Open a bash shell in the app container and remove on exit"
 	@echo "  make log-web      -  View logs from the webserver container running NGINX"
@@ -50,6 +51,12 @@ restart:
 .PHONY: reboot
 reboot:
 	docker compose down --remove-orphans
+	docker compose up -d --force-recreate
+
+# Rebuild - docker-compose down, build and up
+.PHONY: rebuild
+rebuild:
+	docker compose down --remove-orphans --rmi all
 	docker compose up -d --force-recreate --build
 
 # This needs to changing to destroy - Remove everything deployed

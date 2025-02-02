@@ -2,7 +2,7 @@ version: '3.8'
 services:
   web:
     image: nginx:latest
-    restart: always
+    restart: on-failure
     volumes:
       - ./web/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
@@ -22,16 +22,13 @@ services:
       DATABASE_NAME: ${POSTGRES_DB}
       DATBASE_URL: ${PGDB_URL}
     volumes:
-       - ./app/rails:/app/rails
+       - ./rails-app:/app/rails
     ports:
       - "3000:3000"
     networks:
       - app-network
-    # This does work but it's a bit messy
+    # This does work to populate the rails directory after persistent volume mount 
     command: /bin/sh -c "cp -av /usr/src/app/* /app/rails/ && bundle exec rails server -b 0.0.0.0 -p 3000"
-    
-    # Sybolic link does not work
-    #command: /bin/sh -c "ln -sf /usr/src/app /app/rails && bundle exec rails server -b 0.0.0.0 -p 3000"
     depends_on:
       - db
 
@@ -55,5 +52,5 @@ networks:
     driver: bridge
 
 volumes:
-  app:
+  rails-app: {}
   pgdata: {}

@@ -63,12 +63,16 @@ To successfully run this application, you need to have the following:
    make down
 ```
 ```bash
-   # Restart all the containers
+   # Restart all the containers services (Containers stay up)
    make restart
 ```
 ```bash
-   # Remove everything then rebuild and deploy
+   # Containers down and then up - no build or image removal
    make reboot
+```
+```bash
+   # Rebuild the images, volumes and containers and deploy
+   make rebuild
 ```
 ```bash
    # Destroy everything deployed
@@ -107,9 +111,9 @@ Details on how to manually install and deploy this Ruby on Rails Application:
 2. Set up environment variables: Create .env file in the root of the git directory or copy sample.env:
    ```bash
    APP_NAME=your_app_name
-   POSTGRES_DB=${APP_NAME}-db
-   POSTGRES_USERNAME=${APP_NAME}-user
+   POSTGRES_USER=${APP_NAME}-user
    POSTGRES_PASSWORD="enter strong password"
+   POSTGRES_DB=${APP_NAME}-db
 
 3. Navigate into the project directory:
    ```bash
@@ -162,6 +166,7 @@ Details on how to manually install and deploy this Ruby on Rails Application:
   ```ruby
 /usr/src/app/
     ├── /db                 # Persistent Volume - PostgreSQL data directory (pg_data)
+    ├── /rails-app          # Persistent Volume - Ruby on Rails Application source directory
     ├── /web                # Ephemeral Volume - NGINX server configuration file
     ├── .dockerignore       # Files and directories to exclude from the Docker build context
     ├── .env                # This contains all the environmental variables - **Sensitive data**
