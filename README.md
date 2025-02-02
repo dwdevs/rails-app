@@ -3,13 +3,11 @@
 This **Ruby on Rails -** application is architected for deployment using Docker containers, organised into distinct tiers:
   - **WEB -** NGINX is deployed as a reverse proxy, routing http://localhost requests locally to the Rails server at http://app:3000 
   - **APP -** Ruby on Rails application and server running on port :3000 and rails configuration in **/usr/src/app/**
-  - **DB -** PostgreSQL Database Server with app database with rails configuration, authenticted and rails app created with --database=postgresql
+  - **DB -** PostgreSQL Database Server with app database and rails configuration authenticted to Postgresql database
   
 Docker Compose manages the deployments, volumes, and networking for this multi-container solution.
 
-Below, you will find the configuration details and step-by-step deployment instructions.
-
-## Table of Contents
+## Table of Contents ##
 - [System Requirements](#system-requirements)
 - [Tech Stack](#tech-stack)
 - [Deploy and Manage](#deploy-and-manage)
@@ -19,6 +17,7 @@ Below, you will find the configuration details and step-by-step deployment instr
 - [Architecture](#architecture)
 - [Typical Solution Workflow](#typical-solution-workflow)
 - [Folder Structure](#folder-structure)
+
 ---
 
 ## System Requirements
