@@ -10,7 +10,7 @@ help:
 	@echo "  make up           -  Deploy the conatiners and start rails app"
 	@echo "  make down         -  Stop all the containers and remove"
 	@echo "  make restart      -  Restart all the containers"
-	@echo "  make reboot       -  Remove everything then rebuild and deploy"
+	@echo "  make reboot       -  Remove everything then deploy"
 	@echo "  make rebuild      -  Rebuild - docker-compose down, build and up"
 	@echo "  make destroy      -  Destroy everything deployed"
 	@echo "  make bash         -  Open a bash shell in the app container and remove on exit"
@@ -56,7 +56,7 @@ reboot:
 # Rebuild - docker-compose down, build and up
 .PHONY: rebuild
 rebuild:
-	docker compose down --remove-orphans --rmi all
+	docker compose down --remove-orphans
 	docker compose up -d --force-recreate --build
 
 # This needs to changing to destroy - Remove everything deployed

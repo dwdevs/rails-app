@@ -1,3 +1,4 @@
+# Depreciated but leaving in case any older versions of docker are used
 version: '3.8'
 services:
   web:
@@ -21,14 +22,13 @@ services:
       DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
       DATABASE_NAME: ${POSTGRES_DB}
       DATBASE_URL: ${PGDB_URL}
-    volumes:
-       - ./rails-app:/app/rails
     ports:
       - "3000:3000"
     networks:
       - app-network
-    # This does work to populate the rails directory after persistent volume mount 
-    command: /bin/sh -c "cp -av /usr/src/app/* /app/rails/ && bundle exec rails server -b 0.0.0.0 -p 3000"
+    command: /bin/sh -c /usr/src/rails-server.sh
+    volumes:
+       - ./app:/usr/src/app
     depends_on:
       - db
 
@@ -52,5 +52,4 @@ networks:
     driver: bridge
 
 volumes:
-  rails-app: {}
   pgdata: {}

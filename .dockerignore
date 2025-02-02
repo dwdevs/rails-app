@@ -24,6 +24,7 @@ log/*
 
 # Ignore all environment files
 /.env*
+/sample.env
 
 # Ignore all default key files
 /config/master.key
