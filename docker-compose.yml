@@ -1,4 +1,4 @@
-# Depreciated but leaving in case any older versions of docker are used
+# Obsolete but leaving in case older versions of docker are used
 version: '3.8'
 services:
   web:
@@ -13,7 +13,7 @@ services:
 
   app:
     build: .
-    image: ${APP_NAME}:latest
+    image: ${APP_NAME}:${IMAGE_VER}
     env_file:
       - .env
     environment:
