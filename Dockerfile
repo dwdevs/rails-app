@@ -1,4 +1,3 @@
-### Stage 1: Build Stage ###
 FROM ruby:3.4.1
 
 # Install dependencies
@@ -7,7 +6,7 @@ RUN bash -c "apt-get update -qq \
 && apt-get clean"
 
 # Set the working directory and copy files & Gemfile for packages into container
-WORKDIR /usr/src/app
+WORKDIR /usr/src/
 
 # # Install & Copy the Gemfile and Gemfile.lock
 COPY Gemfile* .
@@ -15,9 +14,6 @@ RUN bundle install
 
 # Copy the rest of the application code
 COPY . .
-
-#Run the script during the build
-RUN ./railsinit.sh
 
 # Expose the Rails server port
 EXPOSE 3000
