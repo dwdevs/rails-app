@@ -22,7 +22,7 @@ services:
       DATABASE_NAME: ${POSTGRES_DB}
       DATBASE_URL: ${PGDB_URL}
     volumes:
-       - ./app:/app/rails
+       - ./app/rails:/app/rails
     ports:
       - "3000:3000"
     networks:
