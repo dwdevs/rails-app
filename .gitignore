@@ -2,14 +2,17 @@
 /app
 /db
 
-# Ignore bundler config.
+# Ignore bundler config
 /.bundle
 
-# Ignore all environment files.
+# Ignore all environment files
 /.env*
 
-# Ignore all logfiles and tempfiles.
+# Ignore all logfiles and tempfiles
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
+# OS files
+.DS_Store*

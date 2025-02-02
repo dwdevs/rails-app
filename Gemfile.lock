@@ -356,9 +356,9 @@ DEPENDENCIES
   jbuilder
   kamal
   pg (~> 1.1)
-  propshaft
-  puma (>= 5.0)
-  rails (~> 8.0.1)
+  propshaft (~> 1.1)
+  puma (>= 6.4)
+  rails (~> 8.0)
   rubocop-rails-omakase
   selenium-webdriver
   solid_cable

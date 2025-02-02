@@ -55,12 +55,13 @@ reboot:
 # This needs to changing to destroy - Remove everything deployed
 .PHONY: destroy
 destroy:
-	docker compose down --rmi all --volumes
+	docker compose down --remove-orphans --rmi all --volumes
+	docker compose rm -f
 
 # Open a bash shell in the app container
 .PHONY: bash
 bash:
-	docker compose run --rm -it app bash
+	docker compose exec -it app bash
 
 # View logs from the web container
 .PHONY: logs-web
@@ -80,14 +81,19 @@ logs-db:
 # Show all databases on PostgreSQL server
 .PHONY: show-db
 show-db:
-	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} -c '\l' 
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c '\l' 
+
+# Show all database users on PostgreSQL server
+.PHONY: show-db-users
+show-db-users:
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c '\du'
 
 # Connect to PostgreSQL and connect to the application database
 .PHONY: psql-app
 psql-app:
-	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} 
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} 
 
 # SQL directly to db container to show schemas on the applicaion database
 .PHONY: psql-app-sql
 psql-app-sql:
-	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} -c "SELECT schema_name FROM information_schema.schemata;"
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c "SELECT schema_name FROM information_schema.schemata;"

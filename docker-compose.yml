@@ -17,14 +17,21 @@ services:
       - .env
     environment:
       RAILS_ENV: ${RAILS_ENV}
-      DATABASE_NAME: ${PGDATABASE}
-      DATABASE_USERNAME: ${PGUSER}
-      DATABASE_PASSWORD: ${PGPASSWORD}
-      DB_URL: ${PGDB_URL}
+      DATABASE_USERNAME: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATBASE_URL: ${PGDB_URL}
+    volumes:
+       - ./app:/app/rails
     ports:
       - "3000:3000"
     networks:
       - app-network
+    # This does work but it's a bit messy
+    command: /bin/sh -c "cp -av /usr/src/app/* /app/rails/ && bundle exec rails server -b 0.0.0.0 -p 3000"
+    
+    # Sybolic link does not work
+    #command: /bin/sh -c "ln -sf /usr/src/app /app/rails && bundle exec rails server -b 0.0.0.0 -p 3000"
     depends_on:
       - db
 
@@ -32,6 +39,10 @@ services:
     image: postgres:latest
     env_file:
       - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./db/postgresql/pgdata:/var/lib/postgresql/data
     ports:
@@ -44,4 +55,5 @@ networks:
     driver: bridge
 
 volumes:
-  pgdata:
+  app:
+  pgdata: {}
