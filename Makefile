@@ -11,6 +11,7 @@ help:
 	@echo "  make down         -  Stop all the containers and remove"
 	@echo "  make restart      -  Restart all the containers"
 	@echo "  make reboot       -  Remove everything then rebuild and deploy"
+	@echo "  make rebuild      -  Rebuild - docker-compose down, build and up"
 	@echo "  make destroy      -  Destroy everything deployed"
 	@echo "  make bash         -  Open a bash shell in the app container and remove on exit"
 	@echo "  make log-web      -  View logs from the webserver container running NGINX"
@@ -50,17 +51,24 @@ restart:
 .PHONY: reboot
 reboot:
 	docker compose down --remove-orphans
+	docker compose up -d --force-recreate
+
+# Rebuild - docker-compose down, build and up
+.PHONY: rebuild
+rebuild:
+	docker compose down --remove-orphans --rmi all
 	docker compose up -d --force-recreate --build
 
 # This needs to changing to destroy - Remove everything deployed
 .PHONY: destroy
 destroy:
-	docker compose down --rmi all --volumes
+	docker compose down --remove-orphans --rmi all --volumes
+	docker compose rm -f
 
 # Open a bash shell in the app container
 .PHONY: bash
 bash:
-	docker compose run --rm -it app bash
+	docker compose exec -it app bash
 
 # View logs from the web container
 .PHONY: logs-web
@@ -80,14 +88,19 @@ logs-db:
 # Show all databases on PostgreSQL server
 .PHONY: show-db
 show-db:
-	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} -c '\l' 
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c '\l' 
+
+# Show all database users on PostgreSQL server
+.PHONY: show-db-users
+show-db-users:
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c '\du'
 
 # Connect to PostgreSQL and connect to the application database
 .PHONY: psql-app
 psql-app:
-	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} 
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} 
 
 # SQL directly to db container to show schemas on the applicaion database
 .PHONY: psql-app-sql
 psql-app-sql:
-	docker compose exec db psql -U ${PGUSER} -d ${PGDATABASE} -c "SELECT schema_name FROM information_schema.schemata;"
+	docker compose exec db psql -U ${POSTGRES_USER} -d ${POSTGRES_DB} -c "SELECT schema_name FROM information_schema.schemata;"

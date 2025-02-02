@@ -2,7 +2,6 @@
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 # THIS FILE HAS BEEN COPIED DURING THE BUILD STAGE
-
 default: &default
   adapter: postgresql
   encoding: unicode

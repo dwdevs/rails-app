@@ -16,11 +16,11 @@ RUN bundle install
 # Copy the rest of the application code
 COPY . .
 
-# Run the script during the build
+#Run the script during the build
 RUN ./railsinit.sh
 
 # Expose the Rails server port
 EXPOSE 3000
 
-# Command to run the Rails server
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# Command to run the Rails server using bundle
+CMD ["/bin/sh", "-c", "bundle", "exec", "rails", "server", "-p", "3000", "-b", "0.0.0.0"]
