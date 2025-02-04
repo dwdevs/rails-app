@@ -1,5 +1,4 @@
 # Ruby on Rails Application
-
 This **Ruby on Rails -** application is architected for deployment using Docker containers, organised into distinct tiers:
   - **WEB -** NGINX is deployed as a reverse proxy, routing http://localhost requests locally to the Rails server at http://app:3000 
   - **APP -** Ruby on Rails application and server running on port :3000 and rails configuration in **/usr/src/app/**
@@ -10,6 +9,7 @@ Docker Compose manages the deployments, volumes, and networking for this multi-c
 ## Table of Contents ##
 - [System Requirements](#system-requirements)
 - [Tech Stack](#tech-stack)
+- [Solution Design](#solution-design)
 - [Deploy and Manage](#deploy-and-manage)
    - [Deploy](#deploy)
    - [Manage](#manage)
@@ -40,7 +40,34 @@ Example: ![Alt Text](http://example.com/image.jpg)
       - **Rails** - Web framework Ruby package with Database config - database.yml
 
 ---
-&nbsp;
+
+## Solution Design
+```mermaid
+graph TD
+    subgraph WEB_Tier
+        NGINX[WEB - NGINX Reverse Proxy :80]
+    end
+
+    subgraph APP_Tier
+        RailsApp[APP - Ruby on Rails :3000]
+        VolumeApp[Volume: /app/src/app]
+    end
+
+    subgraph DB_Tier
+        Postgres[DB - PostgreSQL Server :5432]
+        VolumeDB[Persistent Volume: pg_data]
+    end
+
+    subgraph DockerCompose[Docker Compose Network]
+        NGINX -->|Proxies requests| RailsApp
+        RailsApp -->|Database queries| Postgres
+    end
+
+    ENV[Environment Variables] --> Postgres
+    ENV --> RailsApp
+    VolumeApp --> RailsApp
+    VolumeDB --> Postgres
+```
 
 ## Deploy and Manage
 
