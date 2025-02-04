@@ -68,7 +68,6 @@ graph TD
     VolumeApp --> RailsApp
     VolumeDB --> Postgres
 ```
-
 ## Deploy and Manage
 
 ### Deploy:
@@ -91,7 +90,7 @@ make init
 docker compose up -d
 ```
 
-### Open browser to - http://localhost
+**Open browser to - http://localhost**
 > NGINX will forward localhost requests to the rails server https://app:3000
 
 &nbsp;
