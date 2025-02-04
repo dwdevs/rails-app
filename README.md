@@ -46,15 +46,22 @@ Example: ![Alt Text](http://example.com/image.jpg)
 
 ### Deploy:
 ```bash
-   git clone git@github.com:dwdevs/ruby-on-rails.git
-   cd ruby-on-rails
-   cp -av sample.env .env
+# Use HTTPS or SSH authentication
+git clone https://github.com/dwdevs/ruby-on-rails.git
+git clone git@github.com:dwdevs/ruby-on-rails.git
+
+cd ruby-on-rails
+cp -av sample.env .env
 ```
 > Now set the environment variables in the .env file:
 - Name of the application with - **APP_NAME=** app_name
 - Version of the docker image - **IMAGE_VER=** v1.2.1
 ```bash
+# Mac-os, Linux & Unix
 make init
+
+# Windows (see manage section below for full list of commands)
+docker compose up -d
 ```
 
 ### Open browser to - http://localhost
